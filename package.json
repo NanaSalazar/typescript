@@ -1,0 +1,19 @@
+{
+  "name": "promises",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "server": "json-server --watch db.json --static ./ --port 3001",
+    "start": "ts-node-dev --respawn ./src/utilities.ts"
+  },
+  "author": "Ana Salazar",
+  "license": "MIT",
+  "devDependencies": {
+    "axios": "^0.21.2",
+    "json-server": "^0.16.3",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.2.2"
+  },
+  "keywords": [],
+  "description": ""
+}
