@@ -94,3 +94,76 @@ type Color = 'Red' | 'Blue' | 'Yellow' | 'Purple' | 'Pink' |'Orange' | 'Green'
 type HappyColor = Exclude<Color, 'Blue' | 'Purple' |'Green'>
 type SadColor = Extract<Color, HappyColor>
 
+
+// Conditional types
+
+type MyString = string
+type MyType = MyString extends string | number ? string : boolean
+
+function myFunction<T>(param: T extends string ? string : number) {
+
+}
+
+myFunction<string>('dois')
+
+function myFunction2<T>(param: T) {
+    return function(param2: T extends number ? number : MyString) {
+
+    }
+}
+
+const minhaFuncao2 = myFunction2('string')
+
+type NumberOrNever<T> = T extends number ? number : never
+const teste: NumberOrNever<number> = 10
+
+
+// mapped types
+
+let OnePropertyOfSquare: keyof Square
+
+type Props = 'x' | 'y' | 'z'
+type MappedFromProps = {
+    [P in Props] : number
+}
+
+//restringindo o tipo genérico
+type MappedFromProps2<T extends string | number | symbol> = {
+    [P in T]: P
+}
+
+type MyMappedTypes = MappedFromProps2<Props>
+type MappedFromProps3<T> = {
+    [P in keyof T]: number | string
+}
+type Test = MappedFromProps3<{a: 'a', b: 3}>
+
+// lookup types - get a type of property of other type
+
+type BankAccount = {
+    id: number,
+    name: string,
+    count: {
+        agency: number,
+        code: number,
+        digit: number
+    }
+}
+type Id = BankAccount['id']
+type Digit = BankAccount['count']['digit']
+type Count = BankAccount['count']
+
+// typeof
+
+const myCount : BankAccount = {
+    id: 2,
+    name: 'Solange',
+    count: {
+        agency: 12,
+        code: 1313,
+        digit: 5
+    }
+}
+
+type TypeOfMyCount = typeof myCount
+type TypeOfMyCountName = typeof myCount.name
